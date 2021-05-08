@@ -1,3 +1,10 @@
+# antlr4
+src/main/generated-sources
+
+# MacOS
+.DS_Store
+
+# Maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
