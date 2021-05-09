@@ -1,7 +1,7 @@
-package com.noiprocs.shell.command.parser
+package com.noiprocs.cli.command.parser
 
-import com.noiprocs.shell.command.Command
-import com.noiprocs.shell.command.parser.antlr4.{CalciteShellLexer, CalciteShellParser}
+import com.noiprocs.cli.command.Command
+import com.noiprocs.cli.command.parser.antlr4.{CalciteShellLexer, CalciteShellParser}
 import org.antlr.v4.runtime._
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 

@@ -1,4 +1,4 @@
-package com.noiprocs.shell.command.executor
+package com.noiprocs.cli.command.executor
 
 import com.google.inject.Inject
 import org.apache.commons.lang3.StringUtils

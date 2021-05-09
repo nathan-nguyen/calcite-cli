@@ -1,4 +1,4 @@
-package com.noiprocs.shell.command
+package com.noiprocs.cli.command
 
 import org.apache.log4j.LogManager
 

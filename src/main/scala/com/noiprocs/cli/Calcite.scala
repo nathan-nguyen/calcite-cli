@@ -1,4 +1,4 @@
-package com.noiprocs.shell
+package com.noiprocs.cli
 
 import scala.io.Source
 

@@ -1,4 +1,4 @@
-package com.noiprocs.shell.command.parser
+package com.noiprocs.cli.command.parser
 
 import org.scalatest.FunSuite
 

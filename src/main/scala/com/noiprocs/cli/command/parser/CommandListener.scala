@@ -1,8 +1,8 @@
-package com.noiprocs.shell.command.parser
+package com.noiprocs.cli.command.parser
 
-import com.noiprocs.shell.command.{Command, CreateTableWithValueCommand}
-import com.noiprocs.shell.command.parser.antlr4.{CalciteShellListener, CalciteShellParser}
-import com.noiprocs.shell.command.parser.antlr4.CalciteShellParser._
+import com.noiprocs.cli.command.{Command, CreateTableWithValueCommand}
+import com.noiprocs.cli.command.parser.antlr4.{CalciteShellListener, CalciteShellParser}
+import com.noiprocs.cli.command.parser.antlr4.CalciteShellParser._
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.tree.{ErrorNode, TerminalNode}
 import scala.collection.mutable

@@ -1,4 +1,4 @@
-package com.noiprocs.shell.command.executor
+package com.noiprocs.cli.command.executor
 
 object CommandSplit {
   def split(source: String): List[String] = {

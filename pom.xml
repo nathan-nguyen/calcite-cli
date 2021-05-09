@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.noiprocs</groupId>
-    <artifactId>calcite-shell</artifactId>
+    <artifactId>calcite-cli</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>calcite-shell</name>
+    <name>calcite-cli</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -241,7 +241,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.noiprocs.shell.CalciteShell</mainClass>
+                            <mainClass>com.noiprocs.cli.CalciteShell</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

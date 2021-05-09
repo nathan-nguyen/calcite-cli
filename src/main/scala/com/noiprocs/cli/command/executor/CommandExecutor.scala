@@ -1,7 +1,7 @@
-package com.noiprocs.shell.command.executor
+package com.noiprocs.cli.command.executor
 
 import com.google.inject.Inject
-import com.noiprocs.shell.command.parser.CommandParser
+import com.noiprocs.cli.command.parser.CommandParser
 import org.apache.log4j.LogManager
 
 class CommandExecutor @Inject()() {

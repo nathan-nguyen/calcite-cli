@@ -1,4 +1,4 @@
-package com.noiprocs.shell.command
+package com.noiprocs.cli.command
 
 trait Command {
   def execute(): Unit

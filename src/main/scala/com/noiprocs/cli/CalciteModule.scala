@@ -1,4 +1,4 @@
-package com.noiprocs.shell
+package com.noiprocs.cli
 
 import com.google.inject.AbstractModule
 import net.codingwell.scalaguice.ScalaModule
