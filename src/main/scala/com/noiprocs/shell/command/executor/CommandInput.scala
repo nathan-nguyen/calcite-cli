@@ -1,9 +1,8 @@
-package com.noiprocs.shell
-
-import scala.io.Source
+package com.noiprocs.shell.command.executor
 
 import com.google.inject.Inject
 import org.apache.commons.lang3.StringUtils
+import scala.io.Source
 
 trait CommandInputSource
 

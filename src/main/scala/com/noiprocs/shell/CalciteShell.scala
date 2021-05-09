@@ -1,10 +1,11 @@
 package com.noiprocs.shell
 
 import com.google.inject.{Guice, Inject}
+import com.noiprocs.shell.command.executor.{CommandExecutor, CommandInputSource, CommandReader}
 import org.jline.reader.{LineReader, LineReaderBuilder, UserInterruptException}
 import org.jline.terminal.{Terminal, TerminalBuilder}
 
-class CalciteShell @Inject() (commandReader: CommandReader, commandAnalyzer: CommandExecutor) {
+class CalciteShell @Inject() (commandReader: CommandReader, commandExecutor: CommandExecutor) {
   val input: StringBuffer = new StringBuffer()
 
   var prompt: String = CalciteShell.PROMPT_TEXT
@@ -65,8 +66,8 @@ class CalciteShell @Inject() (commandReader: CommandReader, commandAnalyzer: Com
           val commandInputSeq = commandReader.withSource(input.toString, CalciteShell.SHELL_SOURCE)
 
           println()
-          commandAnalyzer.execute(commandInputSeq)
-          commandAnalyzer.awaitQueryTermination()
+          commandExecutor.execute(commandInputSeq)
+          commandExecutor.awaitQueryTermination()
           println()
         } catch {
           case ne: NoClassDefFoundError => throw ne

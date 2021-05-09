@@ -1,33 +1,40 @@
 package com.noiprocs.shell.command.parser
 
+import com.noiprocs.shell.command.Command
 import com.noiprocs.shell.command.parser.antlr4.{CalciteShellLexer, CalciteShellParser}
-import org.antlr.v4.runtime.{ANTLRInputStream, CommonTokenStream}
-import org.apache.log4j.LogManager
+import org.antlr.v4.runtime._
+import org.antlr.v4.runtime.tree.ParseTreeWalker
 
 object CommandParser {
-  private lazy val Logger = LogManager.getLogger(getClass.getName)
-
-  def parseCommand(command: String): Unit = {
+  def parseCommand(command: String): Seq[Command] = {
     val commandCharArray = command.trim.toCharArray
     val stream = new ANTLRInputStream(commandCharArray, commandCharArray.length)
     val lexer = new CalciteShellLexer(stream)
-    val tokens = new CommonTokenStream(lexer)
+    lexer.setTokenFactory(new CommonTokenFactory(true))
 
-    val parser = new CalciteShellParser(tokens)
+    val tokenStream = new UnbufferedTokenStream[CommonToken](lexer)
 
-    val createTableWithValueCommandContext = parser.createTableWithValueCommand()
-    Logger.info(s"Table name: ${createTableWithValueCommandContext.tableName.getText}")
+    val parser = new CalciteShellParser(tokenStream)
+    parser.setTrimParseTree(true)
 
-    val columnNameIterator = createTableWithValueCommandContext.columnName().iterator()
-    while (columnNameIterator.hasNext) {
-      val columnName = columnNameIterator.next()
-      Logger.info(s"Column: ${columnName.getText}")
-    }
+    parser.addErrorListener(
+      new BaseErrorListener() {
+        override def syntaxError(recognizer: Recognizer[_, _],
+                                 offendingSymbol: Any, line: Int,
+                                 charPositionInLine: Int,
+                                 msg: String, e: RecognitionException): Unit = {
+          throw new IllegalStateException(
+            s"Failed to parse at line $line char $charPositionInLine due to $msg", e
+          )
+        }
+      }
+    )
 
-    createTableWithValueCommandContext.valueBlock
-      .getText.trim
-      .split("[\n()]")
-      .filter(_.nonEmpty)
-      .foreach(row => Logger.info("Row: " + row))
+    val commandContext = parser.command()
+    val parseTreeWalker = new ParseTreeWalker
+    val commandListener = new CommandListener
+
+    parseTreeWalker.walk(commandListener, commandContext)
+    commandListener.commandList
   }
 }

@@ -4,6 +4,10 @@ tokens {
     DELIMITER
 }
 
+command
+    : createTableWithValueCommand
+    ;
+
 createTableWithValueCommand
     : TABLE (tableName = STRING_IDENTIFIER) COLUMNS columnName (',' columnName)* VALUES (valueBlock = VALUE_BLOCK)
     ;

@@ -1,4 +1,4 @@
-package com.noiprocs.shell
+package com.noiprocs.shell.command.executor
 
 import com.google.inject.Inject
 import com.noiprocs.shell.command.parser.CommandParser
@@ -9,7 +9,7 @@ class CommandExecutor @Inject()() {
 
   def execute(commandInput: CommandInput): Unit = {
     Logger.info(s"Executing ${commandInput.source} ${commandInput.relativeLineNumber}")
-    CommandParser.parseCommand(commandInput.text)
+    CommandParser.parseCommand(commandInput.text).foreach(_.execute())
   }
 
   def execute(commandInputSeq: Seq[CommandInput]): Unit = {

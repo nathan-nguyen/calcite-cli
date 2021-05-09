@@ -13,6 +13,6 @@ class CommandParserTest extends FunSuite {
         |2, 3
         |)
         |""".stripMargin
-    CommandParser.parseCommand(command.trim)
+    CommandParser.parseCommand(command.trim).foreach(_.execute())
   }
 }
