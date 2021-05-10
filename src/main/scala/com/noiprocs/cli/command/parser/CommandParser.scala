@@ -17,6 +17,9 @@ object CommandParser {
     val parser = new CalciteShellParser(tokenStream)
     parser.setTrimParseTree(true)
 
+    // Prevent lexer to print out errors to console
+    parser.removeErrorListener(ConsoleErrorListener.INSTANCE)
+
     parser.addErrorListener(
       new BaseErrorListener() {
         override def syntaxError(recognizer: Recognizer[_, _],
