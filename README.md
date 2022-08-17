@@ -1,16 +1,24 @@
 # calcite-cli
 
-## Run create table command
+## Build and run
+
+```bash
+mvn package && java -jar target/calcite-cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
-TABLE employee_table
-COLUMNS employer_id, employee_id
+
+## Commands
+
+### Create table
+```sql
+TABLE employees
+COLUMNS employee_id, employee_name, employer_id
 VALUES (
-1, 2
-2, 3
+    1, Alex, 2
+    2, Bob, 3
 );
 ```
 
-## Run SQL
-```
-SELECT * FROM employee_table;
+### SQL
+```sql
+SELECT * FROM employees;
 ```

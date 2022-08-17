@@ -4,15 +4,14 @@ import org.scalatest.FunSuite
 
 class CommandParserTest extends FunSuite {
   test("CommandParser.parseCommand - 00") {
-    val command =
+    CommandParser.parseCommand(
       """
-        |TABLE employee_table
-        |COLUMNS employer_id, employee_id
+        |TABLE employees
+        |COLUMNS employee_id, employee_name, employer_id
         |VALUES (
-        |1, 2
-        |2, 3
-        |)
-        |""".stripMargin
-    CommandParser.parseCommand(command.trim).foreach(_.execute())
+        |    1, Alex, 2
+        |    2, Bob, 3
+        |)""".stripMargin.trim
+    ).foreach(_.execute())
   }
 }

@@ -2,6 +2,7 @@ package com.noiprocs.cli
 
 import com.google.inject.{Guice, Inject}
 import com.noiprocs.cli.command.executor.{CommandExecutor, CommandInputSource, CommandReader}
+import com.noiprocs.cli.sql.SqlConnection
 import org.jline.reader.{LineReader, LineReaderBuilder, UserInterruptException}
 import org.jline.terminal.{Terminal, TerminalBuilder}
 
@@ -96,6 +97,8 @@ class CalciteShell @Inject() (commandReader: CommandReader, commandExecutor: Com
   }
 
   def quit(): Unit = {
+    SqlConnection.getInstance().close()
+
     System.exit(0)
   }
 

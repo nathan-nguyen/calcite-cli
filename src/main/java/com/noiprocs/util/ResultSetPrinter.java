@@ -9,38 +9,35 @@ public class ResultSetPrinter {
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int columnCount = resultSetMetaData.getColumnCount();
 
-        boolean printHeader = false;
-        StringBuilder lbsb = new StringBuilder("+");
+        // Print headers
+        StringBuilder lineBreakSb = new StringBuilder("+");
+        StringBuilder headerSb = new StringBuilder("|");
 
+        for (int i = 1; i <= columnCount; ++i) {
+            String columnName = resultSetMetaData.getColumnName(i);
+            headerSb.append(" ").append(columnName).append("         |");
+
+            while (lineBreakSb.length() < headerSb.length() - 1) lineBreakSb.append("-");
+            lineBreakSb.append("+");
+        }
+        System.out.println(lineBreakSb);
+        System.out.println(headerSb);
+        System.out.println(lineBreakSb);
+
+        // Print row values
         while (resultSet.next()) {
-            StringBuilder vsb = new StringBuilder("|");
-
-            if (!printHeader) {
-                printHeader = true;
-                StringBuilder headerSb = new StringBuilder("|");
-
-                for (int i = 1; i <= columnCount; ++i) {
-                    String columnName = resultSetMetaData.getColumnName(i);
-                    headerSb.append(" ").append(columnName).append("         |");
-
-                    while (lbsb.length() < headerSb.length() - 1) lbsb.append("-");
-                    lbsb.append("+");
-                }
-                System.out.println(lbsb);
-                System.out.println(headerSb);
-                System.out.println(lbsb);
-            }
+            StringBuilder valueSb = new StringBuilder("|");
 
             for (int i = 1; i <= columnCount; ++i) {
                 String columnValue = resultSet.getString(i);
-                vsb.append(" ").append(columnValue);
-                for (int j = vsb.length(); vsb.length() < lbsb.length() && lbsb.charAt(j) != '+'; ++j) {
-                    vsb.append(" ");
+                valueSb.append(" ").append(columnValue);
+                for (int j = valueSb.length(); valueSb.length() < lineBreakSb.length() && lineBreakSb.charAt(j) != '+'; ++j) {
+                    valueSb.append(" ");
                 }
-                vsb.append("|");
+                valueSb.append("|");
             }
-            System.out.println(vsb);
+            System.out.println(valueSb);
+            System.out.println(lineBreakSb);
         }
-        System.out.println(lbsb);
     }
 }
